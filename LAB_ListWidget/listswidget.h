@@ -27,5 +27,6 @@ private:
     QPushButton *rightSortButton;
 
     bool emptyCheck(QListWidget* l);
+    bool noCurrent(QListWidget* l);
 };
 #endif // LISTSWIDGET_H

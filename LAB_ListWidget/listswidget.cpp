@@ -98,7 +98,7 @@ ListsWidget::ListsWidget(QWidget *parent)
 
 void ListsWidget::fromLeftToRight()
 {
-    if(!emptyCheck(lw))
+    if(!emptyCheck(lw) && !noCurrent(lw))
     {
         int r = lw->currentRow();
         if (r != -1)
@@ -113,7 +113,7 @@ void ListsWidget::fromLeftToRight()
 
 void ListsWidget::fromRightToLeft()
 {
-    if(!emptyCheck(rw))
+    if(!emptyCheck(rw) && !noCurrent(rw))
     {
         int r = rw->currentRow();
         if (r != -1)
@@ -130,12 +130,16 @@ void ListsWidget::leftSort()
 {
     if(!emptyCheck(lw))
         lw->sortItems(Qt::AscendingOrder);
+    leftSelectItem();
+    rightSelectItem();
 }
 
 void ListsWidget::rightSort()
 {
     if(!emptyCheck(rw))
         rw->sortItems(Qt::DescendingOrder);
+    leftSelectItem();
+    rightSelectItem();
 }
 
 void ListsWidget::leftSelectItem()
@@ -146,6 +150,16 @@ void ListsWidget::leftSelectItem()
 void ListsWidget::rightSelectItem()
 {
     lw->setCurrentRow(-1);
+}
+
+bool ListsWidget::noCurrent(QListWidget *l)
+{
+    if(l->currentRow() == -1)
+    {
+        QMessageBox::warning(0, "Ошибка!", "В списке не выбран текущий элемент!");
+        return true;
+    }
+    return false;
 }
 
 bool ListsWidget::emptyCheck(QListWidget *l)
