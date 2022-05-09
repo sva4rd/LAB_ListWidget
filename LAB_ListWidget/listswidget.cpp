@@ -26,10 +26,10 @@ ListsWidget::ListsWidget(QWidget *parent)
     rw->setMidLineWidth(1);
 
     toRight = new QPushButton("&>", lFrame);
-    toRight->setMinimumHeight(40);
+    toRight->setMinimumHeight(50);
     //toRight->setStyleSheet("border-style: solid;" "border-width: 2px;");
     toLeft = new QPushButton("&<", lFrame);
-    toLeft->setMinimumHeight(40);
+    toLeft->setMinimumHeight(50);
 
     leftSortButton = new QPushButton("&Sort(increase)", lFrame);
     rightSortButton = new QPushButton("&Sort(decrease)", lFrame);
@@ -70,20 +70,24 @@ ListsWidget::ListsWidget(QWidget *parent)
     vbox1->addWidget(lbl1);
     vbox1->addWidget(lw);
     vbox1->addWidget(leftSortButton);
+    vbox1->setSpacing(0);
 
-    vbox2->addSpacing(26);
+    vbox2->addSpacing(20);
     vbox2->addWidget(toRight);
     vbox2->addStretch(1);
     vbox2->addWidget(toLeft);
-    vbox2->addSpacing(35);
+    vbox2->addSpacing(28);
+    vbox2->setSpacing(0);
 
     vbox3->addWidget(lbl2);
     vbox3->addWidget(rw);
     vbox3->addWidget(rightSortButton);
+    vbox3->setSpacing(0);
 
     hbox->addLayout(vbox1);
     hbox->addLayout(vbox2);
     hbox->addLayout(vbox3);
+    hbox->setSpacing(0);
 
     connect(toRight, &QPushButton::clicked, this, &ListsWidget::fromLeftToRight);
     connect(toLeft, &QPushButton::clicked, this, &ListsWidget::fromRightToLeft);
